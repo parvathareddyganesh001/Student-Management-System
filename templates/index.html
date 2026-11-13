@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <h1>Student Management System</h1>
+
+    <p>Welcome to our Student Management System!</p>
+
+    {% with messages = get_flashed_messages() %}
+    {% for message in messages %}
+        <div class="success-message">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% endwith %}
+
+    <h2>Add Student</h2>
+
+    <form method="POST">
+
+        <label>Student ID:</label>
+        <input type="number" name="student_id" required>
+
+        <br><br>
+
+        <label>Student Name:</label>
+        <input type="text" name="student_name" required>
+
+        <br><br>
+
+        <label>Student Marks:</label>
+        <input type="number" name="marks" required>
+
+        <br><br>
+
+        <button type="submit">Add Student</button>
+
+    </form>
+
+    <h2>Search Student</h2>
+
+    <form method="POST">
+
+        <input type="number" name="search_id" placeholder="Enter Student ID" required>
+
+        <button type="submit" name="search">Search</button>
+
+    </form>
+
+    <h2>Update Student Marks</h2>
+
+    <form method="POST">
+
+        <input type="number" name="update_id" placeholder="Enter Student ID" required>
+
+        <br><br>
+
+        <input type="number" name="new_marks" placeholder="Enter New Marks" required>
+
+        <br><br>
+
+        <button type="submit" name="update">Update Marks</button>
+
+    </form>
+
+    <h2>Delete Student</h2>
+
+    <form method="POST">
+
+        <input type="number" name="delete_id" placeholder="Enter Student ID" required>
+
+        <button type="submit" name="delete">Delete Student</button>
+
+    </form>
+
+    <h2>Student List</h2>
+
+    <table border="1">
+
+        <tr>
+            <th>Student ID</th>
+            <th>Student Name</th>
+            <th>Student Marks</th>
+        </tr>
+
+        {% for student in students %}
+        <tr>
+            <td>{{ student[0] }}</td>
+            <td>{{ student[1] }}</td>
+            <td>{{ student[2] }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</body>
+</html>
