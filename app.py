@@ -6,6 +6,15 @@ app.secret_key = "student123"
 
 def get_db_connection():
     connection = sqlite3.connect("students.db")
+
+    connection.execute("""
+        CREATE TABLE IF NOT EXISTS students (
+            id INTEGER PRIMARY KEY,
+            name TEXT,
+            marks INTEGER
+        )
+    """)
+
     return connection
 
 @app.route("/", methods=["GET", "POST"])
@@ -96,4 +105,5 @@ def home():
 
     return render_template("index.html", students=students)
 
-app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
